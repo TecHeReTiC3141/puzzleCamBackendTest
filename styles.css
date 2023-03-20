@@ -1,0 +1,123 @@
+:root {
+    --easy: rgba(27, 188, 9, 0.63);
+    --medium: rgba(9, 167, 188, 0.63);
+    --hard: rgba(188, 30, 9, 0.68);
+    --transition: all .3s linear;
+    --primary: rgba(6, 127, 149, 0.85);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.cur-time {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo {
+    width: 90%;
+    height: auto;
+}
+
+.you-win {
+    display: none;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, .75);
+    padding: 1rem;
+    border: .25em solid rgba(21, 20, 20, 0.66);
+    border-radius: .5em;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start {
+    border-radius: .5em;
+    font-size: 1.5em;
+    border: none;
+    padding: .25em .5em;
+    color: black;
+    box-shadow: 3px 3px 2px black;
+    margin: .5em;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.start:hover {
+    color: white;
+    background-color: var(--primary);
+}
+
+.difficulties {
+    list-style-type: none;
+    display: flex;
+    font-size: 1.5em;
+}
+
+.difficulties li {
+    padding: .5rem 1rem;
+    margin: .5rem 1rem;
+    border: 2px solid black;
+    border-radius: .5rem;
+    transition: var(--transition);
+    box-shadow: 0 5px black;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+}
+
+.difficulties li:hover, .difficulties li.active {
+    box-shadow: 0 0 black;
+    top: 5px;
+}
+
+#easy {
+    background-color: var(--easy);
+}
+
+#medium {
+    background-color: var(--medium);
+}
+
+#hard {
+    background-color: var(--hard);
+}
+
+#mainCanvas {
+    display: flex;
+    justify-content: center;
+}
+
+.web-cam {
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        font-size: 1.5em;
+    }
+}
+

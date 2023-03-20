@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PuzzleCam</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <meta content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="menu">
+        <img src="logo.png" alt="Logo" class="logo">
+        <div class="controls">
+            <h3 class="choose">Choose your difficulty</h3>
+            <ul class="difficulties">
+                <li id="easy">Easy</li>
+                <li id="medium">Medium</li>
+                <li id="hard">Hard</li>
+            </ul>
+            <!--        <label for="difficulty">Difficulty</label>-->
+            <!--        <select id="difficulty" onchange="setDifficulty()">-->
+            <!--            <option value="easy">Easy</option>-->
+            <!--            <option value="medium">Medium</option>-->
+            <!--            <option value="hard">Hard</option>-->
+            <!--            <option value="insane">Insane</option>-->
+            <!--        </select>-->
+            <button class="start" onclick="restart()">Start</button>
+        </div>
+    </div>
+
+    <div class="endScreen">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h2 class="you-win">You win, your time is </h2>
+        <div class="scoreValue"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name">
+        <button class="saveBtn" onclick="saveScore()">Save</button>
+    </div>
+
+    <canvas id="mainCanvas"></canvas>
+    <h3 class="cur-time">Current time: <span></span></h3>
+
+    <script src="script.js"></script>
+</body>
+</html>
