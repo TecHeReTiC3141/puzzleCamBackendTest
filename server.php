@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/plain');
+// header('Content-Type: text/plain');
 $db_host = "localhost";
 $db_user = "root";
 $db_password = "TecHeres3141";
@@ -14,7 +14,7 @@ mysqli_select_db($lnk, "puzzlecamscores") or die("Failed to select puzzlecamscor
 // First query
 
 function getAllScores($lnk) {
-	$difficulties = array('Easy', 'Medium', 'Hard', 'Insane');
+	$difficulties = array('easy', 'medium', 'hard', 'insane');
 	$scores = array();
 	for ($diff = 0; $diff < count($difficulties); ++$diff) {
 		$scores[$difficulties[$diff]] = getScoresByDifficulty($difficulties[$diff], $lnk);
@@ -41,7 +41,7 @@ function getScoresByDifficulty($difficulty, $lnk) {
 
 // inserting new data
 
-function insertNewEntry($data, $lnk) {
+function insertNewScore($data, $lnk) {
 	$query = "INSERT INTO Scores (NAME, TIME, DIFFICULTY) 
 	VALUES ('".$data["name"]."', '".$data["time"]."', '".$data["difficulty"]."')";
 	return mysqli_query($lnk, $query, );
@@ -54,6 +54,15 @@ $allScores = getAllScores($lnk);
 
 if (isset($_GET["info"])) {
 	echo $_GET["info"];
-}
+	$info = json_decode($_GET["info"]);
+	if (insertNewScore($info, $lnk)) {
+		echo "Score inserted successfully";
+	} else {
+		echo "Error while insertion";
+	}
+} else {
+	$data = getAllScores($lnk);
+	echo json_encode($data);
+}	
 
 ?>

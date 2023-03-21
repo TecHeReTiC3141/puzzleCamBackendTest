@@ -16,6 +16,7 @@ let SIZE = {
 }
 let PIECES = [];
 const SCALER = .8;
+let curDifficulty = 'easy';
 
 let MENU_SECTION = document.querySelector('.menu');
 let TOP_OFFSET = MENU_SECTION.getBoundingClientRect().height;
@@ -28,6 +29,8 @@ let ENDSCREEN = document.querySelector('.endScreen');
 let YOUWIN = document.querySelector('.you-win');
 
 let NAMEINPUT = document.querySelector('.saveBtn');
+
+let SCORESTABLE = document.querySelector('.scoresTable');
 
 let POP_SOUND = new Audio('pop_sound.mp3');
 POP_SOUND.volume = .25;
@@ -131,7 +134,7 @@ function win() {
     CURTIME.style.display = 'none';
     YOUWIN.style.display = 'block'
     ENDSCREEN.style.display = 'block';
-
+    END_TIME = Date.now();
     WIN_SOUND.play();
 }
 
@@ -186,7 +189,7 @@ function addEventListeners() {
 }
 
 function setDifficulty(curDirr) {
-    let curDifficulty = curDirr.innerText.toLowerCase();
+    curDifficulty = curDirr.innerText.toLowerCase();
     switch(curDifficulty) {
         case "easy":
             initiatePieces(3, 3,);
@@ -219,6 +222,56 @@ function saveScore() {
     let name = NAMEINPUT.value;
 }
 
+function updateTime() {
+    if (START_TIME != null) {
+        let timePassed = new Date(Date.now() - START_TIME);
+        TIMEPASSED.innerHTML = timePassed.toLocaleString('ru', TIME_OPTIONS);
+    }
+}
+
+function goToMenu() {
+    MENU_SECTION.style.display = 'block';
+    ENDSCREEN.style.display = 'none';
+}
+
+function showScores() {
+    MENU_SECTION.style.display = 'none';
+    ENDSCREEN.style.display = 'none';
+    SCORESTABLE.style.display = 'block';
+    getScores();
+}
+
+function getScores() {
+    fetch('server.php').then(response => {
+        response.json().then(data => {
+            console.log(data);
+            createScoresTable(data);
+        });
+    });
+}
+
+function createScoresTable(data) {
+    let table = SCORESTABLE.querySelector('.scores');
+    table.replaceChildren();
+    let header = document.createElement('th');
+    header.innerHTML = `<td>Name</td>
+                        <td>Time</td>
+                        <td>Difficulty</td>`;
+    table.insertAdjacentElement('afterbegin', header);
+    console.log(data[curDifficulty])
+    for (let ind in data[curDifficulty]) {
+        let row = data[curDifficulty][ind];
+        let tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row.NAME}</td><td>${row.TIME}</td><td>${row.DIFFICULTY}</td>`;
+        table.insertAdjacentElement('beforeend', tr);
+    }
+}
+
+function backToEndScreen() {
+    ENDSCREEN.style.display = 'block';
+    SCORESTABLE.style.display = 'none';
+
+}
 
 function mouseDownEvent(event) {
     SELECTED_SEGMENT = getSelected(event);
@@ -239,15 +292,6 @@ const TIME_OPTIONS = {
     minute: 'numeric',
     second: 'numeric',
 }
-
-function updateTime() {
-    if (START_TIME != null) {
-        let timePassed = new Date(Date.now() - START_TIME);
-        TIMEPASSED.innerHTML = timePassed.toLocaleString('ru', TIME_OPTIONS);
-
-    }
-}
-
 
 class Piece {
     errorRate = 25;

@@ -36,7 +36,7 @@ body {
     display: none;
 }
 
-.menu {
+.menu, .endScreen, .scoresTable {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -46,6 +46,7 @@ body {
     padding: 1rem;
     border: .25em solid rgba(21, 20, 20, 0.66);
     border-radius: .5em;
+    gap: .5em;
 }
 
 .controls {
@@ -54,7 +55,7 @@ body {
     align-items: center;
 }
 
-.start {
+.fancy-btn {
     border-radius: .5em;
     font-size: 1.5em;
     border: none;
@@ -66,7 +67,7 @@ body {
     transition: var(--transition);
 }
 
-.start:hover {
+.fancy-btn:hover {
     color: white;
     background-color: var(--primary);
 }
@@ -120,4 +121,3 @@ body {
         font-size: 1.5em;
     }
 }
-
