@@ -49,6 +49,11 @@ body {
     gap: .5em;
 }
 
+.scoresTable {
+    height: 45vh;
+    overflow: auto;
+}
+
 .controls {
     display: flex;
     flex-direction: column;
@@ -105,6 +110,29 @@ body {
 
 #hard {
     background-color: var(--hard);
+}
+
+.scores {
+    border-collapse: collapse;
+}
+
+.scores tr {
+    border-bottom: 1px solid gray;
+}
+
+.scores td, .scores th {
+    text-align: center;
+    padding: .5em;
+}
+
+.scores tr:last-child {
+    border-bottom: none;
+}
+
+.scores th {
+    background-color: var(--medium);
+    color: white;
+    text-transform: capitalize;
 }
 
 #mainCanvas {

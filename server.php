@@ -1,5 +1,5 @@
 <?php
-// header('Content-Type: text/plain');
+header('Content-Type: text/plain');
 $db_host = "localhost";
 $db_user = "root";
 $db_password = "TecHeres3141";
@@ -43,8 +43,8 @@ function getScoresByDifficulty($difficulty, $lnk) {
 
 function insertNewScore($data, $lnk) {
 	$query = "INSERT INTO Scores (NAME, TIME, DIFFICULTY) 
-	VALUES ('".$data["name"]."', '".$data["time"]."', '".$data["difficulty"]."')";
-	return mysqli_query($lnk, $query, );
+	VALUES ('".$data->name."', '".$data->time."', '".$data->difficulty."')";
+	return mysqli_query($lnk, $query);
 }
 
 $allScores = getAllScores($lnk);
@@ -58,7 +58,7 @@ if (isset($_GET["info"])) {
 	if (insertNewScore($info, $lnk)) {
 		echo "Score inserted successfully";
 	} else {
-		echo "Error while insertion";
+		echo 'Error while insertion';
 	}
 } else {
 	$data = getAllScores($lnk);
